@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppSelector } from '../store/store';
+import { SingleArticle } from './SingleArticle';
 
 
 export const List = () => {
@@ -10,10 +11,12 @@ export const List = () => {
         <p>List of articles:</p>
         {articles.map(article => {
             return (
-                <article key={article.id}>
-                    <header>{article.title}</header>
-                    <p>{article.content}</p>
-                </article>
+                <SingleArticle 
+                    key = {article.id}
+                    id = {article.id}
+                    title = {article.title}
+                    content = {article.content}
+                />
             )
         })}
     </div>

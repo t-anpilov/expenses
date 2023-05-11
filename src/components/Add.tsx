@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { validateTextInput } from '../models/validate';
 import { addArticle } from '../store/features/articleSlice';
 import { useAppDispatch } from '../store/store';
 
@@ -7,6 +8,15 @@ export const Add = () => {
     const newContent = useRef<string>("");
 
     const dispatch = useAppDispatch();
+
+    const createNeArticle = (title: string, content: string) => {
+        let _title = validateTextInput(title, 5)
+        let _content = validateTextInput(content, 10)
+        if (_title && _content) {
+            dispatch(addArticle({title: title, content: content}))
+        }
+        
+    }
 
 
     return(
@@ -18,15 +28,12 @@ export const Add = () => {
                 onChange={(e) => (newTitle.current = e.target.value)}
             />
             <label htmlFor="articleContent">Article</label>
-            <input
+            <textarea
                 id="articleContent"
-                type="text" 
                 onChange={(e) => (newContent.current = e.target.value)}
             />
             <button
-                onClick={() => {
-                    dispatch(addArticle({title: newTitle.current, content: newContent.current}))
-                }}            
+                onClick={()=>createNeArticle(newTitle.current, newContent.current)}            
             >
                 Add New Article
             </button>

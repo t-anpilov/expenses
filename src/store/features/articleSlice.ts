@@ -13,13 +13,15 @@ interface ArticlesState {
 
 const initialState: ArticlesState = { articles: [] };
 
+const newId = () => Math.round(Math.random()*100000)
+
 export const ArticleSlice = createSlice({
     name: "article",
     initialState,
     reducers : {
         addArticle: (state, action: PayloadAction<{ title: string, content: string }>) => {
            state.articles.push({
-                id: state.articles.length,
+                id: newId(),
                 title: action.payload.title,
                 content: action.payload.content,
            }) 
