@@ -10,8 +10,8 @@ export const Add = () => {
     const dispatch = useAppDispatch();
 
     const createNeArticle = (title: string, content: string) => {
-        let _title = validateTextInput(title, 5)
-        let _content = validateTextInput(content, 10)
+        let _title = validateTextInput(title, 'your title',5)
+        let _content = validateTextInput(content, 'your text',10)
         if (_title && _content) {
             dispatch(addArticle({title: title, content: content}))
         }
