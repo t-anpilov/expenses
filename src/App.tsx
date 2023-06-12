@@ -6,8 +6,9 @@ import { List } from './components/List';
 function App() {
   return (
     <div className="App">
-    <Add />
-    <List />
+      <header>Add your expense here</header>
+      <Add />
+      <List />
     </div>
   );
 }

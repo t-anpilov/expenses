@@ -1,3 +1,52 @@
 .App {
   text-align: center;
 }
+
+header {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-top: 12px
+}
+
+.addForm {
+  margin: 16px 10% 0px;
+  border-top: 5px solid rgb(141, 151, 168);
+  border-left: 5px solid rgb(141, 151, 168);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.addItem {
+  display: flex;
+  margin: 8px;
+  flex-direction: column;
+}
+
+#expensePrice { width: 100px }
+
+#expenseDetails { 
+  min-width: 80px;
+  max-width: 320px; 
+}
+
+.addItem label {
+  padding-bottom: 4px;
+  text-align: left;
+}
+
+.addButton {
+  padding: 4px;
+  align-self: center;
+}
+
+.expenseShown {
+  width: 80%;
+  margin: 20px auto 0;
+  border-collapse: collapse;
+}
+
+.expenseShown td, th {
+  border: 1px solid black;
+  padding: 8px;
+}

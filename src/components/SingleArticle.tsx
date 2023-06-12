@@ -12,15 +12,21 @@ export const SingleArticle = (props: Article) => {
     const removeHandler = (id: number)=> {
         dispatch(removeArticle({id: id}))
     }
+    
+    const showDate = props.date!.toLocaleDateString()  
 
     return(    
-        <article>
-            <header>{props.title}</header>
-            <p>{props.content}</p>
-            <button 
-                onClick={()=>removeHandler(props.id)}>
-                Remove it
-            </button>
-        </article>
+        <tr>
+            <td>{props.type}</td>
+            <td>{props.content}</td>
+            <td>{props.cost}</td>
+            <td>{showDate}</td>
+            <td>
+                <button 
+                    onClick={()=>removeHandler(props.id)}>
+                    Remove it
+                </button>
+            </td>
+        </tr>
     );
 };

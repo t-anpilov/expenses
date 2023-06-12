@@ -13,3 +13,19 @@ export const validateTextInput = (value: string, property: string, reuiredLength
       }
 
 }
+
+export const validateNumberInput = (value: number, maxAmount: number) => {
+
+    try {
+        if(value <= 0 ) throw "please enter number";
+        if(value > maxAmount) {
+            throw `you have to provide a number less than ${maxAmount}`
+        };
+        return value
+    }
+
+    catch(error) {
+        alert(error);
+      }
+
+}

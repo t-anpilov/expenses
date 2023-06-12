@@ -5,7 +5,12 @@ import { ArticleSlice } from "./features/articleSlice";
 export const store = configureStore({
     reducer: {
         article: ArticleSlice.reducer
-    }
+    },
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false
+    }),
+    
 });
 
 export const useAppDispatch: () => typeof store.dispatch=useDispatch;

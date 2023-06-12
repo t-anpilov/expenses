@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+
 export interface Article {
     id: number;
-    title: string;
+    type: string;
     content: string;
-    image?: string
+    cost: number;
+    date: Date
 };
 
 interface ArticlesState {
@@ -13,17 +15,17 @@ interface ArticlesState {
 
 const initialState: ArticlesState = { articles: [] };
 
-const newId = () => Math.round(Math.random()*100000)
-
 export const ArticleSlice = createSlice({
     name: "article",
     initialState,
     reducers : {
-        addArticle: (state, action: PayloadAction<{ title: string, content: string }>) => {
+        addArticle: (state, action: PayloadAction<{ id: number, type: string, content: string, cost: number, date: Date }>) => {
            state.articles.push({
-                id: newId(),
-                title: action.payload.title,
+                id: action.payload.id,
+                type: action.payload.type,
                 content: action.payload.content,
+                cost: action.payload.cost,
+                date: action.payload.date
            }) 
         },
         removeArticle: (state, action: PayloadAction<{ id: number }>) => {
