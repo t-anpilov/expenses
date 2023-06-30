@@ -41,25 +41,32 @@ export const Add = () => {
         );
     };   
 
-    const createNeArticle = () => {    
-        if (newType.current && newContent.current && newCost.current) {
-            const _type = newType.current.value;
-            const _id = Math.round(Math.random()*100000);        
-            const _content = validateTextInput(newContent.current.value, 'your text',5);
-            const _cost = validateNumberInput(Number(newCost.current.value), 100000);
+    const createNeArticle = () => {  
+
+        if (newType.current && newContent.current && newCost.current) { 
+
+            const _id = Math.round(Math.random()*100000);
             const _date = new Date();
+            let _type, _content, _cost
+            _type = validateTextInput(newType.current.value, 'type', 1);       
+            if (_type) _content = validateTextInput(newContent.current.value, 'description', 5);
+            if (_type && _content) _cost = validateNumberInput(Number(newCost.current.value), 100000);
+            
             if (_type && _content && _cost && _date) {
                 dispatch(addArticle({id: _id, type: _type, content: _content, cost: _cost, date: _date}));
                 newCost.current.value = '';
                 newContent.current.value = '';
                 newType.current.value = '';
             }; 
+            
         };
     };
 
 
     return(
-        <div className="addForm">            
+    <div className="addSection"> 
+        <header>Add your expense here</header> 
+        <div className="addForm">          
             <div className="addItem">
                 <label htmlFor="expenseType">Type:</label>
                 {typeSelect()}
@@ -89,7 +96,7 @@ export const Add = () => {
             >
                 Add New
             </button>
-
-        </div>    
+        </div>
+    </div>    
     );
 };

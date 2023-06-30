@@ -1,16 +1,17 @@
 import React from 'react';
 import { useAppSelector } from '../store/store';
 import { SingleArticle } from './SingleArticle';
+import { Statistics } from './Statistic';
 
 
 export const List = () => {
 
     const articles = useAppSelector(state => state.article.articles)
-    
+
     const emptyListMessage = () => {
         return (
             <tr>
-                <td>No records yet</td>
+                <td colSpan={5}>No records yet</td>
             </tr>
         )
     }
@@ -44,6 +45,7 @@ export const List = () => {
         </tbody>
         
     </table>
+    <Statistics/>
     </div>
     );
 };
