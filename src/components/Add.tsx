@@ -13,7 +13,6 @@ export enum expenseTypes {
 
 export const Add = () => {
 
-    //const [newType, setNewType] = useState<string>('')
     const newType = useRef<HTMLSelectElement>(null);
     const newContent = useRef<HTMLInputElement>(null);
     const newCost = useRef<HTMLInputElement>(null);
@@ -35,7 +34,7 @@ export const Add = () => {
         };
 
         return (
-          <select ref = {newType}>
+          <select id="expenseType" ref = {newType}>
             { options }           
           </select>
         );
@@ -73,7 +72,7 @@ export const Add = () => {
                 
             </div>
             <div className="addItem">
-                <label htmlFor="articleName">Price:</label>
+                <label htmlFor="expensePrice">Price:</label>
                 <input 
                     id="expensePrice"
                     type="number" 
