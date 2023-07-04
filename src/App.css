@@ -10,8 +10,7 @@ header {
 
 .addSection {
   margin: 16px 10% 0px;
-  border-top: 5px solid rgb(141, 151, 168);
-  border-left: 5px solid rgb(141, 151, 168);
+  border: 3px solid rgb(141, 151, 168);
 }
 
 
@@ -19,6 +18,31 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+.modal-open {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;  
+}
+
+.open {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  background-color: white;
+}
+
+.hiddenButton {  
+  background-color: rgba(139, 139, 139, 0.443);
+  z-index: 9999; 
 }
 
 .addItem {

@@ -11,7 +11,14 @@ export enum expenseTypes {
     Relax = 'relax'
 }
 
-export const Add = () => {
+interface AddProps {
+    isOpen: boolean;
+    onClose: () => void;
+  }
+
+export const Add: React.FC<AddProps> = ({isOpen, onClose}) => {
+
+    if (!isOpen) return null;
 
     const newType = useRef<HTMLSelectElement>(null);
     const newContent = useRef<HTMLInputElement>(null);
@@ -63,7 +70,7 @@ export const Add = () => {
 
 
     return(
-    <div className="addSection"> 
+    <div className={`addSection ${isOpen ? 'open' : ''}`}> 
         <header>Add your expense here</header> 
         <div className="addForm">          
             <div className="addItem">
@@ -94,8 +101,9 @@ export const Add = () => {
                 onClick={createNeArticle}            
             >
                 Add New
-            </button>
+            </button>            
         </div>
+        <button className="closeButton" onClick={onClose}>Close</button>
     </div>    
     );
 };

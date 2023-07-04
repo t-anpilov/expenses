@@ -2,8 +2,12 @@ import React, { useEffect } from 'react';
 import { Article, removeArticle } from '../store/features/articleSlice';
 import { useAppDispatch } from '../store/store';
 
+interface shownExpense extends Article {
+    isHidden : boolean
+}
 
-export const SingleArticle = (props: Article) => {
+
+export const SingleArticle = (props: shownExpense) => {
     
     useEffect(() => console.log(props.id), [])
 
@@ -23,6 +27,7 @@ export const SingleArticle = (props: Article) => {
             <td>{showDate}</td>
             <td>
                 <button 
+                    className={`${props.isHidden ? 'hiddenButton' : ''}`} 
                     onClick={()=>removeHandler(props.id)}>
                     Remove it
                 </button>
