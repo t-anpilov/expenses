@@ -5,7 +5,7 @@
 header {
   font-weight: bold;
   font-size: 1.1em;
-  margin-top: 12px
+  margin-top: 16px
 }
 
 .mainContainer {
@@ -18,9 +18,9 @@ header {
   padding: 0 10% 0 10%;
 }
 
-.addSection {
-  margin: 16px 10% 0px;
+.addWindow {
   border: 3px solid rgb(121, 125, 132);
+  padding: 0 16px 12px;
 }
 
 .modal-open {
@@ -36,11 +36,20 @@ header {
 .open {
   display: block;
   position: fixed;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10000;
   background-color: white;
+}
+
+.btn {
+  padding: 4px;
+  align-self: center;
+}
+
+.hidden {
+  display: none;
 }
 
 .hiddenButton {  
@@ -48,7 +57,7 @@ header {
   z-index: 9999; 
 }
 
-.addForm { 
+.flexContainer { 
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -56,25 +65,37 @@ header {
 
 .addItem {
   display: flex;
-  margin: 8px;
+  margin: 16px 16px 40px 16px;
   flex-direction: column;
+}
+
+.addItem input {
+  height: 24px;
+}
+
+.addItem select {
+  height: 30px;
+}
+
+.addActions {
+  justify-content: end;
+  margin-bottom: 8px;
+}
+
+.addActions :last-child {
+  margin: 0 16px;
 }
 
 #expensePrice { width: 100px }
 
 #expenseDetails { 
-  min-width: 80px;
-  max-width: 320px; 
+  width: 240px;
 }
+
 
 .addItem label {
-  padding-bottom: 4px;
+  padding-bottom: 6px;
   text-align: left;
-}
-
-.addButton {
-  padding: 4px;
-  align-self: center;
 }
 
 .expenseShown {

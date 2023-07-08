@@ -34,7 +34,7 @@ export const List = () => {
     <div className='listHeader'>
         <h3>List of expenses</h3>
         <button 
-            className={`addButton ${isOpen ? 'modal-open' : ''}`} 
+            className={`btn ${isOpen ? 'modal-open hidden' : ''}`} 
             onClick={openModal}> 
             ADD NEW 
         </button>        

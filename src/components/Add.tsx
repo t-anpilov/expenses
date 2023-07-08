@@ -70,9 +70,9 @@ export const Add: React.FC<AddProps> = ({isOpen, onClose}) => {
 
 
     return(
-    <div className={`addSection ${isOpen ? 'open' : ''}`}> 
-        <header>Add your expense here</header> 
-        <div className="addForm">          
+    <div className={`addWindow ${isOpen ? 'open' : ''}`}> 
+        <header>Add your expense here:</header> 
+        <div className="flexContainer">          
             <div className="addItem">
                 <label htmlFor="expenseType">Type:</label>
                 {typeSelect()}
@@ -94,16 +94,18 @@ export const Add: React.FC<AddProps> = ({isOpen, onClose}) => {
                     type="text"
                     ref = {newContent}
                 />    
-            </div>
-                          
+            </div>                          
+                       
+        </div>
+        <div className ="flexContainer addActions">
             <button 
-                className="addItem addButton"
+                className="btn"
                 onClick={createNeArticle}            
             >
                 Add New
-            </button>            
-        </div>
-        <button className="closeButton" onClick={onClose}>Close</button>
+            </button> 
+            <button className="btn" onClick={onClose}>Close</button>
+        </div>        
     </div>    
     );
 };
