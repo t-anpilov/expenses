@@ -6,7 +6,7 @@ export interface Article {
     type: string;
     content: string;
     cost: number;
-    date: Date
+    date: Date;
 };
 
 interface ArticlesState {
