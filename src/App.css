@@ -8,16 +8,19 @@ header {
   margin-top: 12px
 }
 
-.addSection {
-  margin: 16px 10% 0px;
-  border: 3px solid rgb(141, 151, 168);
+.mainContainer {
+  position: relative;
 }
 
-
-.addForm { 
+.listHeader {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content:space-between;
+  padding: 0 10% 0 10%;
+}
+
+.addSection {
+  margin: 16px 10% 0px;
+  border: 3px solid rgb(121, 125, 132);
 }
 
 .modal-open {
@@ -43,6 +46,12 @@ header {
 .hiddenButton {  
   background-color: rgba(139, 139, 139, 0.443);
   z-index: 9999; 
+}
+
+.addForm { 
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .addItem {
@@ -71,7 +80,7 @@ header {
 .expenseShown {
   table-layout: fixed;
   width: 80%;
-  margin: 20px auto 0;
+  margin: 10px auto 0;
   border-collapse: collapse;  
 }
 

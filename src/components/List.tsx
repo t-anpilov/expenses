@@ -29,16 +29,16 @@ export const List = () => {
     };
 
     return (
-    <div>
-    <div>
+    <div className='mainContainer'>
+    <Add isOpen={isOpen} onClose={closeModal}></Add>
+    <div className='listHeader'>
+        <h3>List of expenses</h3>
         <button 
             className={`addButton ${isOpen ? 'modal-open' : ''}`} 
             onClick={openModal}> 
-            + 
-        </button>
+            ADD NEW 
+        </button>        
     </div>
-    <Add isOpen={isOpen} onClose={closeModal}></Add>
-    <h3>List of expenses:</h3>
     <table className="expenseShown">
         <thead>
         <tr>
