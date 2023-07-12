@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useAppSelector } from '../store/store';
 import { SingleArticle } from './SingleArticle';
-//import { Statistics } from './Statistic';
 import { Add } from './Add';
 
 
