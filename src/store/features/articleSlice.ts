@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { stateExample } from "./stateExample";
 
 
 export interface Article {
@@ -21,7 +22,9 @@ interface ArticlesState {
     articles: Article[]
 };
 
-const initialState: ArticlesState = { articles: [] };
+const initialState: ArticlesState = { 
+    articles: stateExample
+};
 
 export const ArticleSlice = createSlice({
     name: "article",
