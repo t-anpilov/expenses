@@ -9,6 +9,14 @@ export interface Article {
     date: Date;
 };
 
+export enum expenseTypes {
+    Food = 'food',
+    Clothes = 'clothes',
+    Home = 'home',
+    Deposit = 'deposit',
+    Relax = 'relax'
+}
+
 interface ArticlesState {
     articles: Article[]
 };

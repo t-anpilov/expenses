@@ -1,15 +1,7 @@
 import React, { ReactElement, useRef, useState } from 'react';
-import { validateTextInput, validateNumberInput } from '../models/validate';
-import { addArticle } from '../store/features/articleSlice';
+import { validateTypeInput, validateTextInput, validateNumberInput } from '../models/validate';
+import { addArticle, expenseTypes } from '../store/features/articleSlice';
 import { useAppDispatch } from '../store/store';
-
-export enum expenseTypes {
-    Food = 'food',
-    Clothes = 'clothes',
-    Home = 'home',
-    Deposit = 'deposit',
-    Relax = 'relax'
-}
 
 interface AddProps {
     isOpen: boolean;
@@ -54,8 +46,8 @@ export const Add: React.FC<AddProps> = ({isOpen, onClose}) => {
             const _id = Math.round(Math.random()*100000);
             const _date = new Date();
             let _type, _content, _cost
-            _type = validateTextInput(newType.current.value, 'type', 1);       
-            if (_type) _content = validateTextInput(newContent.current.value, 'description', 5);
+            _type = validateTypeInput(newType.current.value, 'type');       
+            if (_type) _content = validateTextInput(newContent.current.value, 'description', 3);
             if (_type && _content) _cost = validateNumberInput(Number(newCost.current.value), 100000);
             
             if (_type && _content && _cost && _date) {

@@ -1,3 +1,26 @@
+import { expenseTypes } from '../store/features/articleSlice';
+
+
+export const validateTypeInput = (value: string, property: string) => {
+    const expenseValues: string[] = [];
+    for (const value of Object.values(expenseTypes)) {
+        expenseValues.push(value)        
+    };
+
+    try {
+        if(!value) throw `please provide ${property}`;
+        if(!expenseValues.includes(value)) {
+            throw `oops, unexpected type is using`
+        };
+        return value
+    }
+
+    catch(error) {
+        alert(error);
+      }
+
+}
+
 export const validateTextInput = (value: string, property: string, reuiredLength: number) => {
 
     try {

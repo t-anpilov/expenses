@@ -1,6 +1,6 @@
 import React from 'react';
 import { Article } from '../store/features/articleSlice';
-import { expenseTypes } from './Add';
+import { expenseTypes } from '../store/features/articleSlice';
 
 interface statisticsProps {
     expenses: Article[]
