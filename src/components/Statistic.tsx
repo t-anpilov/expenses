@@ -1,17 +1,21 @@
 import React from 'react';
-import { useAppSelector } from '../store/store';
+import { Article } from '../store/features/articleSlice';
 import { expenseTypes } from './Add';
 
-export const Statistics = () => {
+interface statisticsProps {
+    expenses: Article[]
+}
 
-    const articles = useAppSelector(state => state.article.articles);
+export const Statistics = (props: statisticsProps) => {
+
+    const expenses = props.expenses;
 
     const typeValues = Object.keys(expenseTypes).map(key => expenseTypes[key as keyof typeof expenseTypes]);
    
     const expensesTotal = () => {         
         let sum: number = 0;
-        if (articles) {
-            sum = articles.reduce((total, item) => {
+        if (expenses) {
+            sum = expenses.reduce((total, item) => {
                 return total + item.cost;
             }, 0);
         }
@@ -20,8 +24,8 @@ export const Statistics = () => {
 
     const expenseByType = (type: expenseTypes) => {
         let sum: number = 0;
-        if (articles) {
-            sum = articles.reduce((total, item) => {
+        if (expenses) {
+            sum =expenses.reduce((total, item) => {
                 if (type === item.type) {
                     return total + item.cost;
                 } else {

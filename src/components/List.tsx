@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAppSelector } from '../store/store';
 import { SingleArticle } from './SingleArticle';
 import { Add } from './Add';
+import { Statistics } from './Statistic';
 
 
 export const List = () => {
@@ -65,7 +66,7 @@ export const List = () => {
         </tbody>
         
     </table>
-    
+    <Statistics expenses={articles} />
     </div>
     );
 };
