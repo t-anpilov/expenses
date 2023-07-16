@@ -1,7 +1,7 @@
 import React, { ReactElement, useRef, useState } from 'react';
 import { validateTypeInput, validateTextInput, validateNumberInput } from '../models/validate';
 import { addArticle, expenseTypes } from '../store/features/articleSlice';
-import { useAppDispatch } from '../store/store';
+import { useAppDispatch, useAppSelector } from '../store/store';
 
 interface AddProps {
     isOpen: boolean;
@@ -9,9 +9,13 @@ interface AddProps {
     onClose: () => void;
   }
 
-export const Add: React.FC<AddProps> = ({isOpen, onClose}) => {
+export const Add: React.FC<AddProps> = ({isOpen, mode, onClose}) => {
 
     if (!isOpen) return null;
+
+    const articles = useAppSelector(state => state.article.articles);
+
+    const id = 0 //should be got from opening button
 
     const newType = useRef<HTMLSelectElement>(null);
     const newContent = useRef<HTMLInputElement>(null);
@@ -60,6 +64,16 @@ export const Add: React.FC<AddProps> = ({isOpen, onClose}) => {
     };
 
 
+    // to be done
+    const editArticle = () => {
+        id+1
+    }
+
+    const removeArticle = () => {
+        id-1
+    }
+
+
     return(
     <div className={`addWindow ${isOpen ? 'open' : ''}`}> 
         <header>Add your expense here:</header> 
@@ -89,14 +103,32 @@ export const Add: React.FC<AddProps> = ({isOpen, onClose}) => {
                        
         </div>
         <div className ="flexContainer addActions">
+            {mode=='add' && 
             <button 
                 className="btn"
                 onClick={createNewArticle}            
             >
                 Add New
             </button> 
+            }
+            {mode=='edit' && 
+            <button 
+                className="btn"
+                onClick={editArticle}          
+            >
+                Edit
+            </button>             
+            }
+            {mode=='edit' && 
+            <button 
+                className="btn"
+                onClick={removeArticle}          
+            >
+                Delete
+            </button>             
+            }
             <button className="btn" onClick={onClose}>Close</button>
-        </div>        
+        </div>       
     </div>    
     );
 };
