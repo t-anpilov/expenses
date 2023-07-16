@@ -16,6 +16,7 @@ export const List = () => {
             setWindowMode('add');
         } else {
             setWindowMode('edit')
+            console.log(id)
         }
         setIsOpen(true);        
         document.body.classList.add('modal-open');
@@ -45,7 +46,7 @@ export const List = () => {
         <h3>List of expenses</h3>
         <button 
             className={`btn ${isOpen ? 'modal-open hidden' : ''}`} 
-            onClick={(e)=> openModal()}> 
+            onClick={()=> openModal()}> 
             ADD NEW 
         </button>        
     </div>

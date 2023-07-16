@@ -5,13 +5,12 @@ import { SingleArticle } from './SingleArticle';
 interface tableProps {
     expenses: Article[];
     visible: boolean;
-    openEditModal: ()=> void
+    openEditModal: (id: number)=> void
 };
 
 export const Table = (props: tableProps) => {
 
-    const expenses = props.expenses;
-    const [windowMode, setWindowMode] = useState('');
+    const expenses = props.expenses;    
 
     const emptyListMessage = () => {
         return <tr><td colSpan={5}>No records yet</td> </tr>   
@@ -40,7 +39,7 @@ export const Table = (props: tableProps) => {
                     cost = {expense.cost}
                     date = {expense.date}
                     isHidden = {props.visible}
-                    edit = {props.openEditModal}
+                    edit = {() =>props.openEditModal(expense.id)}
                 />
             )
         })}

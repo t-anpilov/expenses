@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Article, removeArticle } from '../store/features/articleSlice';
 import { useAppDispatch } from '../store/store';
 
@@ -10,8 +10,6 @@ interface shownExpense extends Article {
 
 export const SingleArticle = (props: shownExpense) => {
     
-    useEffect(() => console.log(props.id), [])
-
     const dispatch = useAppDispatch();
 
     const removeHandler = (id: number)=> {

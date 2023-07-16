@@ -1,25 +1,24 @@
 import React, { ReactElement, useRef, useState } from 'react';
 import { validateTypeInput, validateTextInput, validateNumberInput } from '../models/validate';
-import { addArticle, expenseTypes } from '../store/features/articleSlice';
+import { addArticle, Article, expenseTypes } from '../store/features/articleSlice';
 import { useAppDispatch, useAppSelector } from '../store/store';
 
 interface AddProps {
     isOpen: boolean;
     mode: string;
     onClose: () => void;
+    currentExpense?: Article;
   }
 
-export const Add: React.FC<AddProps> = ({isOpen, mode, onClose}) => {
+export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, currentExpense}) => {
 
-    if (!isOpen) return null;
-
-    const articles = useAppSelector(state => state.article.articles);
-
-    const id = 0 //should be got from opening button
+    if (!isOpen) return null;    
 
     const newType = useRef<HTMLSelectElement>(null);
     const newContent = useRef<HTMLInputElement>(null);
     const newCost = useRef<HTMLInputElement>(null);
+
+    const [id, setId] = useState<number>()
 
     const dispatch = useAppDispatch();
 
@@ -63,14 +62,22 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose}) => {
         };
     };
 
-
+    
     // to be done
     const editArticle = () => {
-        id+1
+        if(currentExpense) {
+            setId(currentExpense.id)
+
+
+        } 
+        // else {} handle error
     }
 
     const removeArticle = () => {
-        id-1
+        if (currentExpense) {
+            setId(currentExpense.id)
+        } 
+        // else {} handle error
     }
 
 
