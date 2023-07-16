@@ -4,12 +4,14 @@ import { SingleArticle } from './SingleArticle';
 
 interface tableProps {
     expenses: Article[];
-    visible: boolean
+    visible: boolean;
+    openEditModal: ()=> void
 };
 
 export const Table = (props: tableProps) => {
 
     const expenses = props.expenses;
+    const [windowMode, setWindowMode] = useState('');
 
     const emptyListMessage = () => {
         return <tr><td colSpan={5}>No records yet</td> </tr>   
@@ -38,6 +40,7 @@ export const Table = (props: tableProps) => {
                     cost = {expense.cost}
                     date = {expense.date}
                     isHidden = {props.visible}
+                    edit = {props.openEditModal}
                 />
             )
         })}

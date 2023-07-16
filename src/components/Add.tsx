@@ -5,6 +5,7 @@ import { useAppDispatch } from '../store/store';
 
 interface AddProps {
     isOpen: boolean;
+    mode: string;
     onClose: () => void;
   }
 

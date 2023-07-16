@@ -3,7 +3,8 @@ import { Article, removeArticle } from '../store/features/articleSlice';
 import { useAppDispatch } from '../store/store';
 
 interface shownExpense extends Article {
-    isHidden : boolean
+    isHidden : boolean;
+    edit: ()=> void    
 }
 
 
@@ -30,6 +31,11 @@ export const SingleArticle = (props: shownExpense) => {
                     className={`${props.isHidden ? 'hiddenButton' : ''}`} 
                     onClick={()=>removeHandler(props.id)}>
                     Remove
+                </button>
+                <button 
+                    className={`${props.isHidden ? 'hiddenButton' : ''}`} 
+                    onClick={props.edit}>
+                    Edit
                 </button>
             </td>
         </tr>

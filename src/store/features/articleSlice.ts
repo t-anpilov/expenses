@@ -53,4 +53,4 @@ export const ArticleSlice = createSlice({
 
 export default ArticleSlice.reducer;
 
-export const { addArticle, removeArticle } = ArticleSlice.actions;
+export const { addArticle, updateArticle, removeArticle } = ArticleSlice.actions;
