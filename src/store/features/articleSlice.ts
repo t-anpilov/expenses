@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { stateExample } from "./stateExample";
+import { stateExample } from "../stateExample";
 
 
 export interface Article {
@@ -30,7 +30,7 @@ export const ArticleSlice = createSlice({
     name: "article",
     initialState,
     reducers : {
-        addArticle: (state, action: PayloadAction<{ id: number, type: string, content: string, cost: number, date: Date }>) => {
+        addArticle: (state, action: PayloadAction<Article>) => {
            state.articles.push({
                 id: action.payload.id,
                 type: action.payload.type,
@@ -39,6 +39,10 @@ export const ArticleSlice = createSlice({
                 date: action.payload.date
            }) 
         },
+        updateArticle: (state, action: PayloadAction<Article>) => {
+            let index = state.articles.findIndex(item => item.id === action.payload.id);
+            state.articles[index] = action.payload;
+         },
         removeArticle: (state, action: PayloadAction<{ id: number }>) => {
             let index = state.articles.findIndex(item => item.id === action.payload.id);
             state.articles.splice(index, 1)

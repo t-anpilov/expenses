@@ -1,4 +1,4 @@
-import { Article } from "./articleSlice"
+import { Article } from "./features/articleSlice"
 
 export const stateExample : Article[] = [  {
     id: 1011101,

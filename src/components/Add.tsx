@@ -39,7 +39,7 @@ export const Add: React.FC<AddProps> = ({isOpen, onClose}) => {
         );
     };   
 
-    const createNeArticle = () => {  
+    const createNewArticle = () => {  
 
         if (newType.current && newContent.current && newCost.current) { 
 
@@ -52,9 +52,7 @@ export const Add: React.FC<AddProps> = ({isOpen, onClose}) => {
             
             if (_type && _content && _cost && _date) {
                 dispatch(addArticle({id: _id, type: _type, content: _content, cost: _cost, date: _date}));
-                newCost.current.value = '';
-                newContent.current.value = '';
-                newType.current.value = '';
+                onClose();
             }; 
             
         };
@@ -92,7 +90,7 @@ export const Add: React.FC<AddProps> = ({isOpen, onClose}) => {
         <div className ="flexContainer addActions">
             <button 
                 className="btn"
-                onClick={createNeArticle}            
+                onClick={createNewArticle}            
             >
                 Add New
             </button> 

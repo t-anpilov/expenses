@@ -29,7 +29,7 @@ export const SingleArticle = (props: shownExpense) => {
                 <button 
                     className={`${props.isHidden ? 'hiddenButton' : ''}`} 
                     onClick={()=>removeHandler(props.id)}>
-                    Remove it
+                    Remove
                 </button>
             </td>
         </tr>
