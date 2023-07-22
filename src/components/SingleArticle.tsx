@@ -2,40 +2,45 @@ import React from 'react';
 import { Article, removeArticle } from '../store/features/articleSlice';
 import { useAppDispatch } from '../store/store';
 
-interface shownExpense extends Article {
+interface shownExpense {
+    expense: Article;
     isHidden : boolean;
-    edit: ()=> void    
+    edit: (expense: Article) => void;    
 }
 
-
-export const SingleArticle = (props: shownExpense) => {
+export const SingleArticle: React.FC<shownExpense>  = ({expense, isHidden, edit}) => {
     
     const dispatch = useAppDispatch();
 
     const removeHandler = (id: number)=> {
         dispatch(removeArticle({id: id}))
     }
+
+    const handleEditClick = () => {
+        console.log(expense.id)        
+        edit(expense);
+    }
     
-    const showDate = props.date!.toLocaleDateString()  
+    const showDate = expense.date!.toLocaleDateString()  
 
     return(    
         <tr>
-            <td>{props.type}</td>
-            <td>{props.content}</td>
-            <td>{props.cost}</td>
+            <td>{expense.type}</td>
+            <td>{expense.content}</td>
+            <td>{expense.cost}</td>
             <td>{showDate}</td>
             <td>
                 <button 
-                    className={`${props.isHidden ? 'hiddenButton' : ''}`} 
-                    onClick={()=>removeHandler(props.id)}>
+                    className={`${isHidden ? 'hiddenButton' : ''}`} 
+                    onClick={()=>removeHandler(expense.id)}>
                     Remove
                 </button>
                 <button 
-                    className={`${props.isHidden ? 'hiddenButton' : ''}`} 
-                    onClick={props.edit}>
+                    className={`${isHidden ? 'hiddenButton' : ''}`} 
+                    onClick={handleEditClick}>
                     Edit
                 </button>
-            </td>
+            </td>            
         </tr>
     );
 };

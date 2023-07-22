@@ -7,21 +7,21 @@ interface AddProps {
     isOpen: boolean;
     mode: string;
     onClose: () => void;
-    currentExpense?: Article;
+    expenseId?: number;
   }
 
-export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, currentExpense}) => {
+export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseId}) => {
 
-    if (!isOpen) return null;    
+    if (!isOpen) return null;     
+    
 
     const newType = useRef<HTMLSelectElement>(null);
     const newContent = useRef<HTMLInputElement>(null);
     const newCost = useRef<HTMLInputElement>(null);
 
-    const [id, setId] = useState<number>()
+    const [currentId, setCurrentId] = useState<number>()
 
     const dispatch = useAppDispatch();
-
         
     const typeSelect = () => {
 
@@ -65,18 +65,19 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, currentExpense})
     
     // to be done
     const editArticle = () => {
-        if(currentExpense) {
-            setId(currentExpense.id)
-
-
+        if(expenseId) {
+            setCurrentId(expenseId)
+            console.log(currentId)
+        } else {
+            console.log('No ID')
         } 
-        // else {} handle error
     }
 
     const removeArticle = () => {
-        if (currentExpense) {
-            setId(currentExpense.id)
-        } 
+        if (expenseId) {
+            setCurrentId(expenseId)
+        }  
+             
         // else {} handle error
     }
 
@@ -84,6 +85,7 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, currentExpense})
     return(
     <div className={`addWindow ${isOpen ? 'open' : ''}`}> 
         <header>Add your expense here:</header> 
+        {expenseId ? <div>{expenseId}</div> : null}
         <div className="flexContainer">          
             <div className="addItem">
                 <label htmlFor="expenseType">Type:</label>
