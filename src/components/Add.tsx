@@ -1,6 +1,6 @@
 import React, { ReactElement, useRef, useState } from 'react';
 import { validateTypeInput, validateTextInput, validateNumberInput } from '../models/validate';
-import { addArticle, Article, expenseTypes } from '../store/features/articleSlice';
+import { addArticle, removeArticle, Article, expenseTypes } from '../store/features/articleSlice';
 import { useAppDispatch, useAppSelector } from '../store/store';
 
 interface AddProps {
@@ -17,9 +17,7 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseId}) => {
 
     const newType = useRef<HTMLSelectElement>(null);
     const newContent = useRef<HTMLInputElement>(null);
-    const newCost = useRef<HTMLInputElement>(null);
-
-    const [currentId, setCurrentId] = useState<number>()
+    const newCost = useRef<HTMLInputElement>(null);    
 
     const dispatch = useAppDispatch();
         
@@ -66,20 +64,21 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseId}) => {
     // to be done
     const editArticle = () => {
         if(expenseId) {
-            setCurrentId(expenseId)
-            console.log(currentId)
+            
         } else {
-            console.log('No ID')
+            console.log('ID for editing is missing')
         } 
     }
 
-    const removeArticle = () => {
+    const removeArticleHandler = () => {
         if (expenseId) {
-            setCurrentId(expenseId)
-        }  
-             
-        // else {} handle error
-    }
+            dispatch(removeArticle({id: expenseId}));
+            onClose();
+        } else {
+            alert('something went wrong');
+            onClose();
+        } 
+    };
 
 
     return(
@@ -131,7 +130,7 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseId}) => {
             {mode=='edit' && 
             <button 
                 className="btn"
-                onClick={removeArticle}          
+                onClick={removeArticleHandler}          
             >
                 Delete
             </button>             
