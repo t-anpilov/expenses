@@ -11,7 +11,7 @@ export const List = () => {
     const articles = useAppSelector(state => state.article.articles);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [windowMode, setWindowMode] = useState<string>('');
-    const [currentId, setCurrentId] = useState<number>()
+    const [currentExpense, setCurrentExpense] = useState<Article>()
 
     const openModal = (expense?: Article) => {
         if (!expense) {
@@ -19,7 +19,7 @@ export const List = () => {
         } else if (expense) {
             setWindowMode('edit');
             console.log(expense.id);
-            setCurrentId(expense.id);
+            setCurrentExpense(expense);
         }
         setIsOpen(true);        
         document.body.classList.add('modal-open');
@@ -95,7 +95,7 @@ export const List = () => {
         isOpen={isOpen}
         mode={windowMode}  
         onClose={closeModal} 
-        expenseId={currentId}
+        expenseForEdit={currentExpense}
     />
     <Statistics expenses={articles} />
     </div>
