@@ -1,6 +1,6 @@
-import React, { ReactElement, useRef, useState } from 'react';
+import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import { validateTypeInput, validateTextInput, validateNumberInput } from '../models/validate';
-import { addArticle, removeArticle, Article, expenseTypes } from '../store/features/articleSlice';
+import { addArticle, removeArticle, Article, expenseTypes, updateArticle } from '../store/features/articleSlice';
 import { useAppDispatch, useAppSelector } from '../store/store';
 
 interface AddProps {
@@ -16,8 +16,16 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseForEdit})
       
     const newType = useRef<HTMLSelectElement>(null);
     const newContent = useRef<HTMLInputElement>(null);
-    const newCost = useRef<HTMLInputElement>(null);    
-
+    const newCost = useRef<HTMLInputElement>(null);   
+    
+    useEffect(()=> {
+        if (expenseForEdit && newType.current && newContent.current && newCost.current) {
+            newType.current.value = expenseForEdit.type;
+            newContent.current.value = expenseForEdit.content;
+            newCost.current.value = expenseForEdit.cost.toString();
+        }
+    }, []);
+    
     const dispatch = useAppDispatch();
         
     const typeSelect = () => {
@@ -62,12 +70,19 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseForEdit})
     
     // to be done
     const editArticle = () => {
-        if(expenseForEdit) {
-
-
+        if(expenseForEdit && newType.current && newContent.current && newCost.current) {
+            const _expense: Article = {
+                id: expenseForEdit.id,
+                type: newType.current.value,
+                content: newContent.current.value,
+                cost: +newCost.current.value,
+                date: expenseForEdit.date
+            };            
+            dispatch(updateArticle(_expense));
             onClose();
         } else {
-            console.log('ID for editing is missing')
+            console.log('Item ID for editing is missing');
+            onClose();
         } 
     }
 
@@ -76,7 +91,7 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseForEdit})
             dispatch(removeArticle({id: expenseForEdit.id}));
             onClose();
         } else {
-            alert('something went wrong');
+            console.log('something went wrong, can find this item');
             onClose();
         } 
     };
@@ -85,7 +100,6 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseForEdit})
     return(
     <div className={`addWindow ${isOpen ? 'open' : ''}`}> 
         <header>Add your expense here:</header> 
-        {expenseForEdit ? <div>{expenseForEdit.content}</div> : null}
         <div className="flexContainer">          
             <div className="addItem">
                 <label htmlFor="expenseType">Type:</label>
@@ -125,7 +139,7 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseForEdit})
                 className="btn"
                 onClick={editArticle}          
             >
-                Edit
+                Save
             </button>             
             }
             {mode=='edit' && 

@@ -16,6 +16,7 @@ export const List = () => {
     const openModal = (expense?: Article) => {
         if (!expense) {
             setWindowMode('add');
+            setCurrentExpense(undefined);
         } else if (expense) {
             setWindowMode('edit');
             console.log(expense.id);
@@ -86,9 +87,21 @@ export const List = () => {
         </button>        
     </div>
     <div className='dateNavigation'>
-        <button onClick={()=>showMonthStats(4)}> May </button>
-        <button onClick={()=>showMonthStats(5)}> June </button>
-        <button onClick={()=>showMonthStats(6)}> July </button>
+        <button 
+            className={`btn ${isOpen ? 'modal-open hidden' : ''}`}
+            onClick={()=>showMonthStats(4)}> 
+            May 
+        </button>
+        <button 
+            className={`btn ${isOpen ? 'modal-open hidden' : ''}`}
+            onClick={()=>showMonthStats(5)}> 
+            June 
+        </button>
+        <button 
+            className={`btn ${isOpen ? 'modal-open hidden' : ''}`}
+            onClick={()=>showMonthStats(6)}> 
+            July 
+        </button>
     </div>    
     {Table()}
     <Add 
