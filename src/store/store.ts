@@ -1,11 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { ArticleSlice } from "./features/articleSlice";
+import rootReducer from "./features/articleSlice";
 
 export const store = configureStore({
-    reducer: {
-        article: ArticleSlice.reducer
-    },
+    reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false

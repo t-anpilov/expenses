@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useAppSelector } from '../store/store';
+import { useSelector } from 'react-redux';
+import { selectAllExpenses, selectExpensesForMonth } from '../store/features/selectors'
 import { Add } from './Add';
 import { Statistics } from './Statistic';
 import { SingleArticle } from './SingleArticle';
@@ -8,7 +9,13 @@ import { Article } from '../store/features/articleSlice';
 
 export const List = () => {
 
-    const articles = useAppSelector(state => state.article.articles);
+    const allExpenses = useSelector(selectAllExpenses); 
+    
+    const currentExpenses = useSelector(selectExpensesForMonth);
+    console.log(currentExpenses);
+
+    const articles = currentExpenses ? currentExpenses : allExpenses;
+    
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [windowMode, setWindowMode] = useState<string>('');
     const [currentExpense, setCurrentExpense] = useState<Article>()
@@ -65,15 +72,9 @@ export const List = () => {
         );            
     }
 
-    const showMonthStats = (month: number) => {
-        const _monthExpenses = [];
-        articles.map( item => {
-            let itemMonth = item.date.getMonth();
-            console.log(itemMonth);
-            if (month === itemMonth) _monthExpenses.push(item)
-        });
-          
-        // not readym maybe better to vreate sepatete slices ?
+    const showMonthStats = (articles: Article[], month: number) => {
+        let selectedArticles: Article[] = articles.filter(item => month===item.date.getMonth());
+        console.log(selectedArticles)        
     }
 
     return (
@@ -89,17 +90,17 @@ export const List = () => {
     <div className='dateNavigation'>
         <button 
             className={`btn ${isOpen ? 'modal-open hidden' : ''}`}
-            onClick={()=>showMonthStats(4)}> 
+            onClick={()=>showMonthStats(articles,4)}> 
             May 
         </button>
         <button 
             className={`btn ${isOpen ? 'modal-open hidden' : ''}`}
-            onClick={()=>showMonthStats(5)}> 
+            onClick={()=>showMonthStats(articles,5)}> 
             June 
         </button>
         <button 
             className={`btn ${isOpen ? 'modal-open hidden' : ''}`}
-            onClick={()=>showMonthStats(6)}> 
+            onClick={()=>showMonthStats(articles,6)}> 
             July 
         </button>
     </div>    

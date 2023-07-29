@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, combineReducers, PayloadAction } from "@reduxjs/toolkit";
 import { stateExample } from "../stateExample";
 
 
@@ -18,7 +18,7 @@ export enum expenseTypes {
     Relax = 'relax'
 }
 
-interface ArticlesState {
+export interface ArticlesState {
     articles: Article[]
 };
 
@@ -26,8 +26,8 @@ const initialState: ArticlesState = {
     articles: stateExample
 };
 
-export const ArticleSlice = createSlice({
-    name: "article",
+export const expensesSlice = createSlice({
+    name: "expensesSlice",
     initialState,
     reducers : {
         addArticle: (state, action: PayloadAction<Article>) => {
@@ -50,7 +50,12 @@ export const ArticleSlice = createSlice({
     },
 });
 
+const rootReducer = combineReducers({
+    slice: expensesSlice.reducer,
+  });
 
-export default ArticleSlice.reducer;
+export default rootReducer;
 
-export const { addArticle, updateArticle, removeArticle } = ArticleSlice.actions;
+export type RootState = ReturnType<typeof rootReducer>;
+
+export const { addArticle, updateArticle, removeArticle } = expensesSlice.actions;
