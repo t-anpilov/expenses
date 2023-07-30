@@ -4,21 +4,21 @@ import { selectAllExpenses, selectExpensesForMonth } from '../store/features/sel
 import { Add } from './Add';
 import { Statistics } from './Statistic';
 import { SingleArticle } from './SingleArticle';
-import { Article } from '../store/features/articleSlice';
+import { Article, RootState } from '../store/features/articleSlice';
 
 
 export const List = () => {
 
-    const allExpenses = useSelector(selectAllExpenses); 
-    
-    const currentExpenses = useSelector(selectExpensesForMonth);
-    console.log(currentExpenses);
+    const allExpenses = useSelector(selectAllExpenses);
 
-    const articles = currentExpenses ? currentExpenses : allExpenses;
-    
+    const [currentMonth, setCurrentMonth] = useState<number>(6);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [windowMode, setWindowMode] = useState<string>('');
-    const [currentExpense, setCurrentExpense] = useState<Article>()
+    const [currentExpense, setCurrentExpense] = useState<Article>();
+
+    const selectedExpenses: Article[] = useSelector((state: RootState) => selectExpensesForMonth(state, currentMonth));        
+    console.log(selectedExpenses);
+    
 
     const openModal = (expense?: Article) => {
         if (!expense) {
@@ -38,6 +38,12 @@ export const List = () => {
         setWindowMode('');
         document.body.classList.remove('modal-open');
     };
+    
+    const showMonthStats = (monthNumber: number) => {        
+        setCurrentMonth(monthNumber)        
+    }
+
+    const articles = selectedExpenses.length ? selectedExpenses : allExpenses;
 
     const Table = () => {
 
@@ -72,11 +78,6 @@ export const List = () => {
         );            
     }
 
-    const showMonthStats = (articles: Article[], month: number) => {
-        let selectedArticles: Article[] = articles.filter(item => month===item.date.getMonth());
-        console.log(selectedArticles)        
-    }
-
     return (
     <div className='mainContainer'>    
     <div className='listHeader'>
@@ -90,17 +91,17 @@ export const List = () => {
     <div className='dateNavigation'>
         <button 
             className={`btn ${isOpen ? 'modal-open hidden' : ''}`}
-            onClick={()=>showMonthStats(articles,4)}> 
+            onClick={()=>showMonthStats(4)}> 
             May 
         </button>
         <button 
             className={`btn ${isOpen ? 'modal-open hidden' : ''}`}
-            onClick={()=>showMonthStats(articles,5)}> 
+            onClick={()=>showMonthStats(5)}> 
             June 
         </button>
         <button 
             className={`btn ${isOpen ? 'modal-open hidden' : ''}`}
-            onClick={()=>showMonthStats(articles,6)}> 
+            onClick={()=>showMonthStats(6)}> 
             July 
         </button>
     </div>    
