@@ -11,14 +11,13 @@ export const List = () => {
 
     const allExpenses = useSelector(selectAllExpenses);
 
-    const [currentMonth, setCurrentMonth] = useState<number>(6);
+    const [currentMonth, setCurrentMonth] = useState<number>();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [windowMode, setWindowMode] = useState<string>('');
     const [currentExpense, setCurrentExpense] = useState<Article>();
 
-    const selectedExpenses: Article[] = useSelector((state: RootState) => selectExpensesForMonth(state, currentMonth));        
-    console.log(selectedExpenses);
-    
+    const selectedExpenses: Article[] | undefined = useSelector((state: RootState) => selectExpensesForMonth(state, currentMonth));        
+       
 
     const openModal = (expense?: Article) => {
         if (!expense) {
@@ -43,7 +42,7 @@ export const List = () => {
         setCurrentMonth(monthNumber)        
     }
 
-    const articles = selectedExpenses.length ? selectedExpenses : allExpenses;
+    const articles = selectedExpenses ? selectedExpenses : allExpenses;
 
     const Table = () => {
 
@@ -103,6 +102,11 @@ export const List = () => {
             className={`btn ${isOpen ? 'modal-open hidden' : ''}`}
             onClick={()=>showMonthStats(6)}> 
             July 
+        </button>
+        <button 
+            className={`btn ${isOpen ? 'modal-open hidden' : ''}`}
+            onClick={()=>setCurrentMonth(undefined)}> 
+            ALL 
         </button>
     </div>    
     {Table()}
