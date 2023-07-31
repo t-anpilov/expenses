@@ -5,6 +5,7 @@ import { Add } from './Add';
 import { Statistics } from './Statistic';
 import { SingleArticle } from './SingleArticle';
 import { Article, RootState } from '../store/features/articleSlice';
+import { Nav } from './Nav';
 
 
 export const List = () => {
@@ -13,12 +14,12 @@ export const List = () => {
 
     const calculatedMonth = (new Date()).getMonth();
 
-    const [currentMonth, setCurrentMonth] = useState<number | undefined>(calculatedMonth);
+    const [currentMonth, setCurrentMonth] = useState<number | null>(calculatedMonth);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [windowMode, setWindowMode] = useState<string>('');
     const [currentExpense, setCurrentExpense] = useState<Article>();
 
-    const selectedExpenses: Article[] | undefined = useSelector((state: RootState) => selectExpensesForMonth(state, currentMonth));        
+    const selectedExpenses: Article[] | null = useSelector((state: RootState) => selectExpensesForMonth(state, currentMonth));        
        
 
     const openModal = (expense?: Article) => {
@@ -40,7 +41,7 @@ export const List = () => {
         document.body.classList.remove('modal-open');
     };
     
-    const showMonthStats = (monthNumber: number) => {        
+    const showMonthStats = (monthNumber: number | null) => {        
         setCurrentMonth(monthNumber)        
     }
 
@@ -80,7 +81,8 @@ export const List = () => {
     }
 
     return (
-    <div className='mainContainer'>    
+    <div className='mainContainer'> 
+    <Nav onClickHandler={showMonthStats}/>   
     <div className='listHeader'>
         <h3>List of expenses</h3>
         <button 
@@ -107,7 +109,7 @@ export const List = () => {
         </button>
         <button 
             className={`btn ${isOpen ? 'modal-open hidden' : ''}`}
-            onClick={()=>setCurrentMonth(undefined)}> 
+            onClick={()=>setCurrentMonth(null)}> 
             ALL 
         </button>
     </div>    

@@ -1,31 +1,45 @@
 import React from 'react';
 import './Nav.css';
 
-export const Nav = () => {
+interface NavProps {
+    onClickHandler: (month: number | null) => void;
+}
+
+export const Nav: React.FC<NavProps> = ({onClickHandler}) => {
        
-    const menuItem = (key: string, name: string, source?: string) => { 
+    const menuItem = (key: string, name: string, monthNumber: number | null) => { 
         return (
-            <li key={key}><a href={source}>{name}</a></li>
+            <li key={key} onClick={()=>onClickHandler(monthNumber)}>
+                <a>{name}</a>
+            </li>
         )
     };
 
-    const menuItems = [
-        {name: 'Main', source:''}, 
-        {name: 'Statistics', source:''}, 
-        {name: 'Statistics 1', source:''}, 
-        {name: 'Analyze', source:''}
+    const menuMonthItems = [
+        {name: 'May', monthNumber:4}, 
+        {name: 'June', monthNumber:5}, 
+        {name: 'July', monthNumber:6}, 
+        {name: 'August', monthNumber:7}
     ]
+
+    const keyGen = ()=> Math.round(Math.random()*100000).toString();
 
     return (
         <div className="navbar">
         <ul> {
 
-            menuItems.map((item)=> {
-                const newKey = Math.round(Math.random()*100000).toString();
-                return  menuItem(newKey, item.name, item.source)
+            menuMonthItems.map((item)=> {
+                const newKey = keyGen()
+                return  menuItem(newKey, item.name, item.monthNumber)
             })
 
-            } 
+            }
+            <li
+                key = {keyGen()}
+                onClick={()=>onClickHandler(null)}
+            >
+                <a>ALL</a>
+            </li> 
         </ul>
         </div>
     )
