@@ -11,7 +11,9 @@ export const List = () => {
 
     const allExpenses = useSelector(selectAllExpenses);
 
-    const [currentMonth, setCurrentMonth] = useState<number>();
+    const calculatedMonth = (new Date()).getMonth();
+
+    const [currentMonth, setCurrentMonth] = useState<number | undefined>(calculatedMonth);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [windowMode, setWindowMode] = useState<string>('');
     const [currentExpense, setCurrentExpense] = useState<Article>();
