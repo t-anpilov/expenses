@@ -92,29 +92,10 @@ export const List = () => {
         </button>        
     </div>
     <div className='dateNavigation'>
-        <button 
-            className={`btn ${isOpen ? 'modal-open hidden' : ''}`}
-            onClick={()=>showMonthStats(4)}> 
-            May 
-        </button>
-        <button 
-            className={`btn ${isOpen ? 'modal-open hidden' : ''}`}
-            onClick={()=>showMonthStats(5)}> 
-            June 
-        </button>
-        <button 
-            className={`btn ${isOpen ? 'modal-open hidden' : ''}`}
-            onClick={()=>showMonthStats(6)}> 
-            July 
-        </button>
-        <button 
-            className={`btn ${isOpen ? 'modal-open hidden' : ''}`}
-            onClick={()=>setCurrentMonth(null)}> 
-            ALL 
-        </button>
+        {currentMonth ? `${currentMonth+1}/2023` : `All expenses`}
     </div>    
     {Table()}
-    <Add 
+    <Add  
         isOpen={isOpen}
         mode={windowMode}  
         onClose={closeModal} 
