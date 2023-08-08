@@ -30,7 +30,8 @@ header {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;  
+  z-index: 9999; 
+  user-select: none;
 }
 
 .open {
@@ -69,6 +70,11 @@ header {
   flex-direction: column;
 }
 
+.addItem label {
+  text-align: left;
+  padding-bottom: 7px;
+}
+
 .addItem input {
   height: 24px;
 }
@@ -90,13 +96,6 @@ header {
 
 #expenseDetails { 
   width: 240px;
-  margin-right: 2px;
-}
-
-
-.addItem label {
-  padding-bottom: 6px;
-  text-align: left;
 }
 
 .expenseShown {

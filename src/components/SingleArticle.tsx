@@ -32,12 +32,14 @@ export const SingleArticle: React.FC<shownExpense>  = ({expense, isHidden, edit}
             <td>
                 <button 
                     className={`${isHidden ? 'hiddenButton' : ''}`} 
-                    onClick={()=>removeHandler(expense.id)}>
+                    onClick={()=>removeHandler(expense.id)}
+                    disabled = {isHidden ? true:false}>
                     Remove
                 </button>
                 <button 
                     className={`${isHidden ? 'hiddenButton' : ''}`} 
-                    onClick={handleEditClick}>
+                    onClick={handleEditClick}
+                    disabled = {isHidden ? true:false}>
                     Edit
                 </button>
             </td>            
