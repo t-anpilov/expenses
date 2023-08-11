@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import { validateTypeInput, validateTextInput, validateNumberInput } from '../models/validate';
 import { addArticle, removeArticle, Article, expenseTypes, updateArticle } from '../store/features/articleSlice';
-import { useAppDispatch, useAppSelector } from '../store/store';
+import { useAppDispatch } from '../store/store';
 
 interface AddProps {
     isOpen: boolean;
@@ -68,7 +68,6 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseForEdit})
     };
 
     
-    // to be done
     const editArticle = () => {
         if(expenseForEdit && newType.current && newContent.current && newCost.current) {
             const _expense: Article = {
@@ -128,7 +127,7 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseForEdit})
         <div className ="flexContainer addActions">
             {mode=='add' && 
             <button 
-                className="btn"
+                className="btn tableBtn editBtn"
                 onClick={createNewArticle}            
             >
                 Add New
@@ -136,7 +135,7 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseForEdit})
             }
             {mode=='edit' && 
             <button 
-                className="btn"
+                className="btn tableBtn editBtn"
                 onClick={editArticle}          
             >
                 Save
@@ -144,7 +143,7 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseForEdit})
             }
             {mode=='edit' && 
             <button 
-                className="btn"
+                className="btn tableBtn deleteBtn"
                 onClick={removeArticleHandler}          
             >
                 Delete

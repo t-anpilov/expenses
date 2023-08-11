@@ -21,27 +21,29 @@ export const SingleArticle: React.FC<shownExpense>  = ({expense, isHidden, edit}
         edit(expense);
     }
     
-    const showDate = expense.date!.toLocaleDateString()  
-
+    const showDate = expense.date!.toLocaleDateString();
+    
     return(    
         <tr>
-            <td>{expense.type}</td>
+            <td >{expense.type}</td>
             <td>{expense.content}</td>
             <td>{expense.cost}</td>
             <td>{showDate}</td>
-            <td>
+            <td> 
+                <div className='actionCell'>
                 <button 
-                    className={`${isHidden ? 'hiddenButton' : ''}`} 
-                    onClick={()=>removeHandler(expense.id)}
-                    disabled = {isHidden ? true:false}>
-                    Remove
-                </button>
-                <button 
-                    className={`${isHidden ? 'hiddenButton' : ''}`} 
+                    className={`${isHidden ? 'hiddenButton tableBtn' : 'tableBtn editBtn'}`} 
                     onClick={handleEditClick}
                     disabled = {isHidden ? true:false}>
-                    Edit
+                    EDIT
                 </button>
+                <button 
+                    className={`${isHidden ? 'hiddenButton tableBtn' : 'tableBtn deleteBtn'}`} 
+                    onClick={()=>removeHandler(expense.id)}
+                    disabled = {isHidden ? true:false}>
+                    DEL
+                </button>
+                </div>
             </td>            
         </tr>
     );

@@ -88,6 +88,10 @@ header {
   margin-bottom: 8px;
 }
 
+.addActions button {
+  margin-left: 6px;
+}
+
 .addActions :last-child {
   margin: 0 16px;
 }
@@ -106,6 +110,53 @@ header {
 }
 
 .expenseShown td, th {
-  border: 1px solid black;
-  padding: 8px;
+  border: 1px solid black;  
+}
+
+.expenseShown td {
+  text-align: left;
+}
+
+.expenseShown td:nth-child(1), th:nth-child(1) {
+  width: 12%;
+  padding: 8px 24px;
+}
+.expenseShown td:nth-child(2), th:nth-child(2) {
+  width: 35%;
+  padding: 8px 24px;
+}
+.expenseShown td:nth-child(3), th:nth-child(3) {
+  text-align: center;
+  padding: 8px 8px;
+}
+.expenseShown td:nth-child(4), th:nth-child(4) {
+  width: 80px;
+  padding: 8px 24px;
+}
+
+.expenseShown th:last-of-type {
+  width: 120px;
+}
+
+.expenseShown td:last-of-type {
+  padding: 8px 6px;
+  width: 120px;
+}
+
+.actionCell {
+  display: flex;
+  justify-content: space-around;
+}
+
+.tableBtn{
+  font-size: 0.8rem;
+  
+}
+
+.deleteBtn {
+  background-color: rgb(224, 118, 118);
+}
+
+.editBtn {
+  background-color: rgb(145, 187, 90);
 }

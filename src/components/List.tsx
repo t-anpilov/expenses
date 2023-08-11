@@ -50,7 +50,7 @@ export const List = () => {
     const Table = () => {
 
         const emptyListMessage = () => {
-            return <tr><td colSpan={5}>No records yet</td> </tr>   
+            return <tr><td colSpan={5}>No records yet</td></tr>   
         };        
 
         return (                
