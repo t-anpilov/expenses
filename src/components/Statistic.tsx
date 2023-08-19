@@ -9,6 +9,8 @@ interface statisticsProps {
 
 export type segmentStats = {name: string, sum: number, colorScheme: string, percent: number};
 
+export const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+
 export const Statistics = (props: statisticsProps) => {
 
     const expenses = props.expenses;
@@ -19,9 +21,11 @@ export const Statistics = (props: statisticsProps) => {
    
     const expensesTotal =  expenses.reduce((total, item) => {
         return total + item.cost;
-    }, 0);    
+    }, 0); 
 
-    const getSegmentStats  = (type: expenseTypes, items: Article[]) : segmentStats => {
+    const colors = ['#e74c3c', '#2ecc71', '#f39c12', '#9b59b6', '#3498db'];
+
+    const getSegmentStats  = (type: expenseTypes, items: Article[], color: string) : segmentStats => {
         let sum: number = 0;
         sum = items.reduce((total, item) => {
                 if (type === item.type) {
@@ -35,21 +39,31 @@ export const Statistics = (props: statisticsProps) => {
         return {
             name: type, 
             sum: sum, 
-            colorScheme: `${type}-color`,
+            colorScheme: color,
             percent: percentCalculated
         };
     };
-
-    for (const type of typeValues) {
-        segmentsStats.push(getSegmentStats(type, expenses))
+    
+    let colorOrder = 0;
+    for (const type of typeValues) {        
+        segmentsStats.push(getSegmentStats(type, expenses, colors[colorOrder]))
+        colorOrder++
     };    
 
-    const expenseByType = (stats: segmentStats) => {        
+    const expenseByType = (stats: segmentStats) => {  
+         
+        const barLength = stats.percent*5
+        
         return (
-            <div key={stats.name}>
-                <span>Total for {stats.name}: </span>
-                <span> {stats.sum} </span>
-                <span>({stats.percent}%) </span>
+            <div key={stats.name} className="statisticLine">
+                <div>
+                    <span>{capitalize(stats.name)} </span>
+                    
+                    <span>({stats.percent}%) </span>
+                </div>
+                <svg width={barLength} height="16">
+                    <rect width={barLength} height="16" fill={stats.colorScheme} />
+                </svg>
             </div>
         )
     };
@@ -66,49 +80,16 @@ export const Statistics = (props: statisticsProps) => {
         }        
     };
 
-    /*const createSegment = (item: segmentStats) => {
-
-        const angle = (item.percent / 100) * 360;
-        const largeArcFlag = angle <= 180 ? 0 : 1;
-
-  const x1 = 50 + 50 * Math.cos((-90 * Math.PI) / 180);
-  const y1 = 50 + 50 * Math.sin((-90 * Math.PI) / 180);
-
-  const x2 = 50 + 50 * Math.cos((angle - 90) * (Math.PI / 180));
-  const y2 = 50 + 50 * Math.sin((angle - 90) * (Math.PI / 180));
-
-  const pathData = `M ${x1} ${y1} A 50 50 0 ${largeArcFlag} 1 ${x2} ${y2} L 50 50 Z`;
-
-       
-        return (
-            <div key={item.name} className="segment">
-                <svg viewBox="0 0 100 100">
-                    <path d={pathData} />
-                 </svg>
-                <span className="label">{item.name}</span>
-            </div>
-    )};
-
-    const diagram = () => {
-        return (
-            <div className="circle-diagram">
-                {
-                   segmentsStats.map(statsItem => createSegment(statsItem)) 
-                }
-            </div>
-        )
-    }*/
-
     return (
         expenses.length ? 
-        <div>
+        <div className='statsContainer'>
             <section>
                 <h3>Total sum</h3>
                 <div> {expensesTotal}  </div>
             </section> 
             <section>
                 <h3>Distribution per expense type</h3>
-                <div> 
+                <div  className='bars'> 
                     { distributionByType() }
                 </div>
             </section>

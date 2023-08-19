@@ -160,3 +160,13 @@ header {
 .editBtn {
   background-color: rgb(145, 187, 90);
 }
+
+.statsContainer {
+  width: 60%;
+  margin: 10px auto 0;
+}
+
+.statisticLine {
+  display: flex;
+  justify-content: space-between;  
+}
