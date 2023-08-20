@@ -1,6 +1,6 @@
-import { Article } from "./features/articleSlice"
+import { Expense } from "./features/expensesSlice"
 
-export const stateExample : Article[] = [  {
+export const stateExample : Expense[] = [  {
     id: 1011101,
     type: 'food',
     content: 'банка кави',

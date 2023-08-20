@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import { selectAllExpenses, selectExpensesForMonth } from '../store/features/selectors'
 import { Add } from './Add';
 import { Statistics } from './Statistic';
-import { SingleArticle } from './SingleArticle';
-import { Article, RootState } from '../store/features/articleSlice';
+import { SingleExpense } from './SingleExpense';
+import { Expense, RootState } from '../store/features/expensesSlice';
 import { Nav } from './Nav';
 
 
@@ -17,12 +17,12 @@ export const List = () => {
     const [currentMonth, setCurrentMonth] = useState<number | null>(calculatedMonth);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [windowMode, setWindowMode] = useState<string>('');
-    const [currentExpense, setCurrentExpense] = useState<Article>();
+    const [currentExpense, setCurrentExpense] = useState<Expense>();
 
-    const selectedExpenses: Article[] | null = useSelector((state: RootState) => selectExpensesForMonth(state, currentMonth));        
+    const selectedExpenses: Expense[] | null = useSelector((state: RootState) => selectExpensesForMonth(state, currentMonth));        
        
 
-    const openModal = (expense?: Article) => {
+    const openModal = (expense?: Expense) => {
         if (!expense) {
             setWindowMode('add');
             setCurrentExpense(undefined);
@@ -45,7 +45,7 @@ export const List = () => {
         setCurrentMonth(monthNumber)        
     }
 
-    const articles = selectedExpenses ? selectedExpenses : allExpenses;
+    const expensesToShow = selectedExpenses ? selectedExpenses : allExpenses;
 
     const Table = () => {
 
@@ -65,9 +65,9 @@ export const List = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {!articles.length ? emptyListMessage() : articles.map(expense => {                        
+                    {!expensesToShow.length ? emptyListMessage() : expensesToShow.map(expense => {                        
                         return (
-                            <SingleArticle 
+                            <SingleExpense 
                                 key = {expense.id}
                                 expense = {expense}
                                 isHidden = {isOpen}
@@ -101,7 +101,7 @@ export const List = () => {
         onClose={closeModal} 
         expenseForEdit={currentExpense}
     />
-    <Statistics expenses={articles} />
+    <Statistics expenses={expensesToShow} />
     </div>
     );
 };

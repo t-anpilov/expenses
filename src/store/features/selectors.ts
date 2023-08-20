@@ -1,8 +1,7 @@
-import { createSelector } from 'reselect';
-import { Article, RootState } from './articleSlice';
+import { Expense, RootState } from './expensesSlice';
 
 
-export const selectAllExpenses = (state: RootState) : Article[] => state.slice.articles;
+export const selectAllExpenses = (state: RootState) : Expense[] => state.slice.expenses;
 
 export const selectExpensesForMonth = (state: RootState, monthNumber: number | null) => {
     const expenses = selectAllExpenses(state);

@@ -1,13 +1,13 @@
-import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import React, { ReactElement, useEffect, useRef } from 'react';
 import { validateTypeInput, validateTextInput, validateNumberInput } from '../models/validate';
-import { addArticle, removeArticle, Article, expenseTypes, updateArticle } from '../store/features/articleSlice';
+import { addExpense, removeExpense, Expense, expenseTypes, updateExpense } from '../store/features/expensesSlice';
 import { useAppDispatch } from '../store/store';
 
 interface AddProps {
     isOpen: boolean;
     mode: string;
     onClose: () => void;
-    expenseForEdit?: Article;
+    expenseForEdit?: Expense;
   }
 
 export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseForEdit}) => {
@@ -48,7 +48,7 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseForEdit})
         );
     };   
 
-    const createNewArticle = () => {  
+    const createNewExpense = () => {  
 
         if (newType.current && newContent.current && newCost.current) { 
 
@@ -60,7 +60,7 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseForEdit})
             if (_type && _content) _cost = validateNumberInput(Number(newCost.current.value), 100000);
             
             if (_type && _content && _cost && _date) {
-                dispatch(addArticle({id: _id, type: _type, content: _content, cost: _cost, date: _date}));
+                dispatch(addExpense({id: _id, type: _type, content: _content, cost: _cost, date: _date}));
                 onClose();
             }; 
             
@@ -68,16 +68,16 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseForEdit})
     };
 
     
-    const editArticle = () => {
+    const editExpense = () => {
         if(expenseForEdit && newType.current && newContent.current && newCost.current) {
-            const _expense: Article = {
+            const _expense: Expense = {
                 id: expenseForEdit.id,
                 type: newType.current.value,
                 content: newContent.current.value,
                 cost: +newCost.current.value,
                 date: expenseForEdit.date
             };            
-            dispatch(updateArticle(_expense));
+            dispatch(updateExpense(_expense));
             onClose();
         } else {
             console.log('Item ID for editing is missing');
@@ -85,9 +85,9 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseForEdit})
         } 
     }
 
-    const removeArticleHandler = () => {
+    const removeExpenseHandler = () => {
         if (expenseForEdit) {
-            dispatch(removeArticle({id: expenseForEdit.id}));
+            dispatch(removeExpense({id: expenseForEdit.id}));
             onClose();
         } else {
             console.log('something went wrong, can find this item');
@@ -128,7 +128,7 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseForEdit})
             {mode=='add' && 
             <button 
                 className="btn tableBtn editBtn"
-                onClick={createNewArticle}            
+                onClick={createNewExpense}            
             >
                 Add New
             </button> 
@@ -136,7 +136,7 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseForEdit})
             {mode=='edit' && 
             <button 
                 className="btn tableBtn editBtn"
-                onClick={editArticle}          
+                onClick={editExpense}          
             >
                 Save
             </button>             
@@ -144,7 +144,7 @@ export const Add: React.FC<AddProps> = ({isOpen, mode, onClose, expenseForEdit})
             {mode=='edit' && 
             <button 
                 className="btn tableBtn deleteBtn"
-                onClick={removeArticleHandler}          
+                onClick={removeExpenseHandler}          
             >
                 Delete
             </button>             

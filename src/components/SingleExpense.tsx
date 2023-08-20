@@ -1,19 +1,19 @@
 import React from 'react';
-import { Article, removeArticle } from '../store/features/articleSlice';
+import { Expense, removeExpense } from '../store/features/expensesSlice';
 import { useAppDispatch } from '../store/store';
 
 interface shownExpense {
-    expense: Article;
+    expense: Expense;
     isHidden : boolean;
-    edit: (expense: Article) => void;    
+    edit: (expense: Expense) => void;    
 }
 
-export const SingleArticle: React.FC<shownExpense>  = ({expense, isHidden, edit}) => {
+export const SingleExpense: React.FC<shownExpense>  = ({expense, isHidden, edit}) => {
     
     const dispatch = useAppDispatch();
 
     const removeHandler = (id: number)=> {
-        dispatch(removeArticle({id: id}))
+        dispatch(removeExpense({id: id}))
     }
 
     const handleEditClick = () => {

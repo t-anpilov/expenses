@@ -1,4 +1,4 @@
-import { expenseTypes } from '../store/features/articleSlice';
+import { expenseTypes } from '../store/features/expensesSlice';
 
 
 export const validateTypeInput = (value: string, property: string) => {

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Article } from '../store/features/articleSlice';
-import { expenseTypes } from '../store/features/articleSlice';
+import { Expense } from '../store/features/expensesSlice';
+import { expenseTypes } from '../store/features/expensesSlice';
 import { Diagram } from './Diagram';
 
 interface statisticsProps {
-    expenses: Article[]
+    expenses: Expense[]
 };
 
 export type segmentStats = {name: string, sum: number, colorScheme: string, percent: number};
@@ -25,7 +25,7 @@ export const Statistics = (props: statisticsProps) => {
 
     const colors = ['#e74c3c', '#2ecc71', '#f39c12', '#9b59b6', '#3498db'];
 
-    const getSegmentStats  = (type: expenseTypes, items: Article[], color: string) : segmentStats => {
+    const getSegmentStats  = (type: expenseTypes, items: Expense[], color: string) : segmentStats => {
         let sum: number = 0;
         sum = items.reduce((total, item) => {
                 if (type === item.type) {

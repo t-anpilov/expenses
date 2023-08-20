@@ -2,7 +2,7 @@ import { createSlice, combineReducers, PayloadAction } from "@reduxjs/toolkit";
 import { stateExample } from "../stateExample";
 
 
-export interface Article {
+export interface Expense {
     id: number;
     type: string;
     content: string;
@@ -18,20 +18,20 @@ export enum expenseTypes {
     Relax = 'relax'
 }
 
-export interface ArticlesState {
-    articles: Article[]
+export interface ExpensesState {
+    expenses: Expense[]
 };
 
-const initialState: ArticlesState = { 
-    articles: stateExample
+const initialState: ExpensesState = { 
+    expenses: stateExample
 };
 
 export const expensesSlice = createSlice({
     name: "expensesSlice",
     initialState,
     reducers : {
-        addArticle: (state, action: PayloadAction<Article>) => {
-           state.articles.push({
+        addExpense: (state, action: PayloadAction<Expense>) => {
+           state.expenses.push({
                 id: action.payload.id,
                 type: action.payload.type,
                 content: action.payload.content,
@@ -39,13 +39,13 @@ export const expensesSlice = createSlice({
                 date: action.payload.date
            }) 
         },
-        updateArticle: (state, action: PayloadAction<Article>) => {
-            let index = state.articles.findIndex(item => item.id === action.payload.id);
-            state.articles[index] = action.payload;
+        updateExpense: (state, action: PayloadAction<Expense>) => {
+            let index = state.expenses.findIndex(item => item.id === action.payload.id);
+            state.expenses[index] = action.payload;
          },
-        removeArticle: (state, action: PayloadAction<{ id: number }>) => {
-            let index = state.articles.findIndex(item => item.id === action.payload.id);
-            state.articles.splice(index, 1)
+        removeExpense: (state, action: PayloadAction<{ id: number }>) => {
+            let index = state.expenses.findIndex(item => item.id === action.payload.id);
+            state.expenses.splice(index, 1)
         },
     },
 });
@@ -58,4 +58,4 @@ export default rootReducer;
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-export const { addArticle, updateArticle, removeArticle } = expensesSlice.actions;
+export const { addExpense, updateExpense, removeExpense } = expensesSlice.actions;
