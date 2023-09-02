@@ -21,9 +21,9 @@ export const Statistics = (props: statisticsProps) => {
    
     const expensesTotal =  expenses.reduce((total, item) => {
         return total + item.cost;
-    }, 0); 
+    }, 0);   
 
-    const colors = ['#e74c3c', '#2ecc71', '#f39c12', '#9b59b6', '#3498db'];
+    const colors: string[] = ['#e74c3c', '#2ecc71', '#f39c12', '#ffd166', '#a5be00', '#9b59b6', '#3498db'];    
 
     const getSegmentStats  = (type: expenseTypes, items: Expense[], color: string) : segmentStats => {
         let sum: number = 0;

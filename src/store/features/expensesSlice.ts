@@ -12,10 +12,12 @@ export interface Expense {
 
 export enum expenseTypes {
     Food = 'food',
-    Clothes = 'clothes',
     Home = 'home',
+    Clothes = 'clothes',
+    Transport = 'transport',
+    Health = 'health',
     Deposit = 'deposit',
-    Relax = 'relax'
+    Relax = 'relax',    
 }
 
 export interface ExpensesState {
