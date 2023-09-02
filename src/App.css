@@ -162,11 +162,16 @@ header {
 }
 
 .statsContainer {
-  width: 60%;
+  width: 67%;
   margin: 10px auto 0;
 }
 
 .statisticLine {
-  display: flex;
-  justify-content: space-between;  
+  display: flex;   
+  justify-content: left;
+}
+
+.statisticLineText {
+  text-align: left;
+  width: 150px;
 }

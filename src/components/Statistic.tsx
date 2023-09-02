@@ -56,7 +56,7 @@ export const Statistics = (props: statisticsProps) => {
         
         return (
             <div key={stats.name} className="statisticLine">
-                <div>
+                <div className="statisticLineText">
                     <span>{capitalize(stats.name)} </span>
                     
                     <span>({stats.percent}%) </span>
